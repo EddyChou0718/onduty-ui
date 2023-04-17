@@ -22,6 +22,7 @@ el-form(:inline="true")
     GenerateDialog(
       :dutyDates="dutyDates"
       :dutyMonth="dutyMonth"
+      :initValue="initValue"
     )
 </template>
 
@@ -65,14 +66,19 @@ export default defineComponent({
       return options;
     });
 
-    const handleDate = () => {
+    const initValue = () => {
       dutyDates.value = [];
+    };
+
+    const handleDate = () => {
+      initValue();
     };
 
     return {
       dutyDates,
       dutyMonth,
       datesOptions,
+      initValue,
       handleDate,
     };
   },

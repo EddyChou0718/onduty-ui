@@ -15,4 +15,9 @@
     "types": ["element-plus/global"],
     "isolatedModules": true
   },
+  "vueCompilerOptions": {
+    "plugins": [
+      "@volar/vue-language-plugin-pug"
+    ]
+  }
 }

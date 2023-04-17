@@ -26,16 +26,21 @@ import { generateCsv } from '@/api/dutyList';
 import { defineComponent, nextTick, ref } from 'vue';
 import type { PropType } from 'vue';
 import dayjs from 'dayjs';
+import { ElNotification } from 'element-plus';
 
 export default defineComponent({
   props: {
     dutyDates: {
       type: Array as PropType<string[]>,
-      default: () => ([]),
+      default: () => [],
     },
     dutyMonth: {
       type: String,
       default: '',
+    },
+    initValue: {
+      type: Function,
+      default: () => {},
     },
   },
   setup(props) {
@@ -55,12 +60,21 @@ export default defineComponent({
       };
 
       const out = await generateCsv(payload);
+      const success = out !== '沒有新增值班';
 
-      csvData.value = out;
+      if (success) {
+        csvData.value = out;
+      }
 
       await nextTick();
 
       handleDialogOpen(false);
+      ElNotification({
+        title: success ? 'Success' : 'Warning',
+        type: success ? 'success' : 'warning',
+        message: success ? '新增成功' : '新增失敗',
+      });
+      props.initValue();
     };
 
     return {
