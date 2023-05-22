@@ -1,4 +1,4 @@
-import { acceptHMRUpdate, defineStore } from 'pinia';
+import { defineStore } from 'pinia';
 import { getList } from '@/api/dutyList';
 import type {
   DutyListType,
@@ -64,10 +64,5 @@ const useDutyListStore = defineStore('dutyList', {
     },
   },
 });
-
-// Pinia HMR
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useDutyListStore, import.meta.hot));
-}
 
 export default useDutyListStore;

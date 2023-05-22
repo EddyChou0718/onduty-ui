@@ -1,4 +1,4 @@
-import { acceptHMRUpdate, defineStore } from 'pinia';
+import { defineStore } from 'pinia';
 import { getGroupMember } from '@/api/dutyList';
 import type { GroupMemberType } from '@/types';
 
@@ -15,10 +15,5 @@ const useGroupMemberStore = defineStore('groupMember', {
     },
   },
 });
-
-// Pinia HMR
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useGroupMemberStore, import.meta.hot));
-}
 
 export default useGroupMemberStore;
